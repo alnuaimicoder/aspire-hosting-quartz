@@ -21,6 +21,7 @@ jobs:
     permissions:
       contents: write
       packages: write
+      id-token: write  # Required for Trusted Publishing (OIDC)
     
     steps:
     - name: Checkout code
@@ -62,20 +63,17 @@ jobs:
     - name: List artifacts
       run: ls -la ./artifacts
 
-    - name: Publish to NuGet.org
+    - name: Publish to NuGet.org (Trusted Publishing)
       run: |
         dotnet nuget push ./artifacts/CommunityToolkit.Aspire.Quartz.Abstractions.${{ steps.get_version.outputs.VERSION }}.nupkg \
-          --api-key ${{ secrets.NUGET_API_KEY }} \
           --source https://api.nuget.org/v3/index.json \
           --skip-duplicate
         
         dotnet nuget push ./artifacts/CommunityToolkit.Aspire.Quartz.${{ steps.get_version.outputs.VERSION }}.nupkg \
-          --api-key ${{ secrets.NUGET_API_KEY }} \
           --source https://api.nuget.org/v3/index.json \
           --skip-duplicate
         
         dotnet nuget push ./artifacts/CommunityToolkit.Aspire.Hosting.Quartz.${{ steps.get_version.outputs.VERSION }}.nupkg \
-          --api-key ${{ secrets.NUGET_API_KEY }} \
           --source https://api.nuget.org/v3/index.json \
           --skip-duplicate
 
@@ -114,7 +112,7 @@ jobs:
         echo "## Release Summary" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "✅ Version: ${{ steps.get_version.outputs.VERSION }}" >> $GITHUB_STEP_SUMMARY
-        echo "✅ Packages published to NuGet.org" >> $GITHUB_STEP_SUMMARY
+        echo "✅ Packages published to NuGet.org using Trusted Publishing" >> $GITHUB_STEP_SUMMARY
         echo "✅ GitHub release created" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### 📦 Published Packages" >> $GITHUB_STEP_SUMMARY
