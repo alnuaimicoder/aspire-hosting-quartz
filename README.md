@@ -4,6 +4,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![.NET](https://img.shields.io/badge/.NET-8.0%20%7C%209.0%20%7C%2010.0+-512BD4)](https://dotnet.microsoft.com/)
 [![Aspire](https://img.shields.io/badge/Aspire-9.0+-512BD4)](https://learn.microsoft.com/dotnet/aspire/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![GitHub issues](https://img.shields.io/github/issues/alnuaimicoder/aspire-hosting-quartz)](https://github.com/alnuaimicoder/aspire-hosting-quartz/issues)
+[![GitHub stars](https://img.shields.io/github/stars/alnuaimicoder/aspire-hosting-quartz)](https://github.com/alnuaimicoder/aspire-hosting-quartz/stargazers)
 
 Enterprise-grade background job scheduling for .NET Aspire using Quartz.NET.
 
