@@ -71,6 +71,7 @@ Shared service defaults for all projects (health checks, OpenTelemetry, etc.).
 - .NET 8.0 SDK or higher
 - Docker Desktop (for SQL Server container)
 - Aspire workload: `dotnet workload install aspire`
+- (Optional) Aspire CLI: Install with `dotnet tool install -g aspire`
 
 ### Steps
 

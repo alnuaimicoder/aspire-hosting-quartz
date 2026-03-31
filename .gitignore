@@ -53,3 +53,12 @@ artifacts/
 
 # Aspire
 *.dcproj.user
+
+# Security - API Keys and Secrets
+*.key
+*.secret
+*-key.txt
+*-secret.txt
+.nuget-key.txt
+.env.local
+.env.*.local

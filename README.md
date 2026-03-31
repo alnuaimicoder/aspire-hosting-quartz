@@ -29,22 +29,24 @@ Enterprise-grade background job scheduling for .NET Aspire using Quartz.NET.
 
 ## 📦 Installation
 
+### Using Aspire CLI (Recommended)
+
+```bash
+# In your AppHost project
+aspire add CommunityToolkit.Aspire.Hosting.Quartz
+
+# In your API/Service projects
+aspire add CommunityToolkit.Aspire.Quartz
+```
+
+### Using .NET CLI
+
 ```bash
 # In your AppHost project
 dotnet add package CommunityToolkit.Aspire.Hosting.Quartz
 
 # In your API/Service projects
 dotnet add package CommunityToolkit.Aspire.Quartz
-```
-
-Or using the Aspire CLI:
-
-```bash
-# Add hosting integration to AppHost
-dotnet aspire add CommunityToolkit.Aspire.Hosting.Quartz
-
-# Add client integration to your services
-dotnet aspire add CommunityToolkit.Aspire.Quartz
 ```
 
 ## 🎯 Quick Start
@@ -116,11 +118,13 @@ public class EmailController : ControllerBase
 
 ## 📚 Documentation
 
-- [Architecture Overview](docs/architecture.md)
-- [Getting Started Guide](docs/getting-started.md)
-- [Configuration Reference](docs/configuration.md)
-- [Observability Guide](docs/observability.md)
-- [Troubleshooting](docs/troubleshooting.md)
+- **[Getting Started Guide](GETTING_STARTED.md)** - Complete step-by-step tutorial
+- **[Sample Application](samples/README.md)** - Working example with API and Worker
+- **[Versioning Policy](docs/VERSIONING.md)** - Multi-targeting and support policy
+- **[Changelog](CHANGELOG.md)** - Release history and changes
+- **[Roadmap](ROADMAP.md)** - Future plans and features
+- **[Contributing](CONTRIBUTING.md)** - How to contribute
+- **[Security Policy](SECURITY.md)** - Reporting vulnerabilities
 
 ## 🤝 Contributing
 
@@ -133,3 +137,20 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 Built with ❤️ for the .NET Aspire community.
+
+Special thanks to:
+- The .NET team for the amazing platform
+- The Aspire team for the cloud-native framework
+- The Quartz.NET team for the robust scheduling engine
+- All contributors and users
+
+## 📞 Support
+
+- **Documentation**: [Getting Started Guide](GETTING_STARTED.md)
+- **Issues**: [GitHub Issues](https://github.com/alnuaimicoder/aspire-hosting-quartz/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/alnuaimicoder/aspire-hosting-quartz/discussions)
+- **Security**: See [SECURITY.md](SECURITY.md)
+
+---
+
+**Made with ❤️ by the community**

@@ -13,7 +13,27 @@ Before you begin, ensure you have:
 
 ## Installation
 
-### Option 1: Using .NET CLI
+### Option 1: Using Aspire CLI (Recommended)
+
+The Aspire CLI provides the easiest way to add integrations to your Aspire projects:
+
+```bash
+# In your AppHost project
+cd YourApp.AppHost
+aspire add CommunityToolkit.Aspire.Hosting.Quartz
+
+# In your API/Service projects
+cd YourApp.ApiService
+aspire add CommunityToolkit.Aspire.Quartz
+```
+
+You can also specify a version:
+
+```bash
+aspire add CommunityToolkit.Aspire.Hosting.Quartz --version 1.0.0
+```
+
+### Option 2: Using .NET CLI
 
 ```bash
 # In your AppHost project
@@ -23,16 +43,6 @@ dotnet add package CommunityToolkit.Aspire.Hosting.Quartz
 # In your API/Service projects
 cd YourApp.ApiService
 dotnet add package CommunityToolkit.Aspire.Quartz
-```
-
-### Option 2: Using Aspire CLI
-
-```bash
-# Add hosting integration
-dotnet aspire add CommunityToolkit.Aspire.Hosting.Quartz
-
-# Add client integration
-dotnet aspire add CommunityToolkit.Aspire.Quartz
 ```
 
 ### Option 3: Using Package Manager Console (Visual Studio)
