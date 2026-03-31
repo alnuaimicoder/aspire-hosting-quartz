@@ -8,6 +8,8 @@ on:
 
 jobs:
   build:
+    # Skip CI in forks to avoid billing issues
+    if: github.repository == 'alnuaimicoder/aspire-hosting-quartz'
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -41,6 +43,8 @@ jobs:
         path: ./artifacts/*.nupkg
 
   validate-samples:
+    # Skip CI in forks to avoid billing issues
+    if: github.repository == 'alnuaimicoder/aspire-hosting-quartz'
     runs-on: ubuntu-latest
 
     steps:
