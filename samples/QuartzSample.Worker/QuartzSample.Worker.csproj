@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-QuartzSample.Worker-04a1285f-3a00-47d2-b6e4-b8f46295ec51</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Quartz" Version="3.13.1" />
+    <PackageReference Include="Quartz.Extensions.Hosting" Version="3.13.1" />
+    <PackageReference Include="Quartz.Serialization.Json" Version="3.13.1" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QuartzSample.ServiceDefaults\QuartzSample.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\..\src\CommunityToolkit.Aspire.Quartz.Abstractions\CommunityToolkit.Aspire.Quartz.Abstractions.csproj" />
+  </ItemGroup>
+</Project>

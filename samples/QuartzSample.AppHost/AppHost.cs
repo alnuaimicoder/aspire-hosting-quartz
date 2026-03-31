@@ -11,10 +11,16 @@ var sqlserver = builder.AddSqlServer("sql")
 var quartz = builder.AddQuartz("quartz")
     .WithDatabase(sqlserver);
 
-var apiService = builder.AddProject("apiservice", "../QuartzSample.ApiService/QuartzSample.ApiService.csproj")
+// Add worker service that processes jobs
+var worker = builder.AddProject<Projects.QuartzSample_Worker>("worker")
+    .WithReference(sqlserver);
+
+// Add API service that enqueues jobs
+var apiService = builder.AddProject<Projects.QuartzSample_ApiService>("apiservice")
     .WithReference(quartz);
 
-builder.AddProject("webfrontend", "../QuartzSample.Web/QuartzSample.Web.csproj")
+// Add web frontend
+builder.AddProject<Projects.QuartzSample_Web>("webfrontend")
     .WithExternalHttpEndpoints()
     .WithReference(apiService)
     .WaitFor(apiService);

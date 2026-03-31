@@ -14,6 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\QuartzSample.ApiService\QuartzSample.ApiService.csproj" />
+    <ProjectReference Include="..\QuartzSample.Web\QuartzSample.Web.csproj" />
+    <ProjectReference Include="..\QuartzSample.Worker\QuartzSample.Worker.csproj" />
     <ProjectReference Include="..\..\src\CommunityToolkit.Aspire.Hosting.Quartz\CommunityToolkit.Aspire.Hosting.Quartz.csproj" />
   </ItemGroup>
 
