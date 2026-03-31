@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Aspire.Library.Quartz.Client/Aspire.Library.Quartz.Client.csproj" />
+    <Project Path="src/Aspire.Library.Quartz.Hosting/Aspire.Library.Quartz.Hosting.csproj" />
+    <Project Path="src/Library.Quartz.Abstractions/Library.Quartz.Abstractions.csproj" />
+  </Folder>
+</Solution>
