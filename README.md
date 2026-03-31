@@ -1,7 +1,9 @@
-# Aspire.Hosting.Quartz
+# CommunityToolkit.Aspire.Quartz
 
 [![CI](https://github.com/alnuaimicoder/aspire-hosting-quartz/actions/workflows/ci.yml/badge.svg)](https://github.com/alnuaimicoder/aspire-hosting-quartz/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![.NET](https://img.shields.io/badge/.NET-8.0%20%7C%209.0%20%7C%2010.0+-512BD4)](https://dotnet.microsoft.com/)
+[![Aspire](https://img.shields.io/badge/Aspire-9.0+-512BD4)](https://learn.microsoft.com/dotnet/aspire/)
 
 Enterprise-grade background job scheduling for .NET Aspire using Quartz.NET.
 
@@ -14,6 +16,13 @@ Enterprise-grade background job scheduling for .NET Aspire using Quartz.NET.
 - **Persistent job storage** - SQL Server and PostgreSQL support
 - **Cron-based scheduling** - Complex scheduling with cron expressions
 - **Real-time metrics** - Monitor jobs in Aspire Dashboard
+- **Multi-targeting support** - Works with .NET 8.0, 9.0, and future versions
+
+## 📋 Requirements
+
+- **.NET SDK**: 8.0 or higher
+- **.NET Aspire**: 9.0 or higher
+- **Database**: SQL Server or PostgreSQL (for persistent storage)
 
 ## 📦 Installation
 
