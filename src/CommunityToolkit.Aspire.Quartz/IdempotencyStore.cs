@@ -1,6 +1,6 @@
 using System.Data;
 
-namespace Aspire.Library.Quartz.Client;
+namespace CommunityToolkit.Aspire.Quartz;
 
 internal sealed class IdempotencyStore : IIdempotencyStore
 {

@@ -2,7 +2,7 @@ using System.Text;
 using System.Text.Json;
 using Library.Quartz.Abstractions;
 
-namespace Aspire.Library.Quartz.Client;
+namespace CommunityToolkit.Aspire.Quartz;
 
 internal sealed class JobSerializer
 {

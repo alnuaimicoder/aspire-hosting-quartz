@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Npgsql;
 
-namespace Aspire.Library.Quartz.Client;
+namespace CommunityToolkit.Aspire.Quartz;
 
 /// <summary>
 /// Extension methods for adding Quartz background job client to the service collection.

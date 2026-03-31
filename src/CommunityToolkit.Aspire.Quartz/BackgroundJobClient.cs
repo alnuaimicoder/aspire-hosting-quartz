@@ -4,7 +4,7 @@ using System.Text.Json;
 using Library.Quartz.Abstractions;
 using Microsoft.Extensions.Logging;
 
-namespace Aspire.Library.Quartz.Client;
+namespace CommunityToolkit.Aspire.Quartz;
 
 internal sealed class BackgroundJobClient : IBackgroundJobClient
 {

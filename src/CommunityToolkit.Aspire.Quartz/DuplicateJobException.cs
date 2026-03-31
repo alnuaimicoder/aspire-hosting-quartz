@@ -1,4 +1,4 @@
-namespace Aspire.Library.Quartz.Client;
+namespace CommunityToolkit.Aspire.Quartz;
 
 /// <summary>
 /// Exception thrown when attempting to enqueue a job with a duplicate idempotency key.

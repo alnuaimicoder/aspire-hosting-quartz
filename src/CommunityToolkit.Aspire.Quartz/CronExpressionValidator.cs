@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace Aspire.Library.Quartz.Client;
+namespace CommunityToolkit.Aspire.Quartz;
 
 internal static partial class CronExpressionValidator
 {
