@@ -1,0 +1,37 @@
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{csproj,props,targets}]
+indent_size = 2
+
+[*.{yml,yaml}]
+indent_size = 2
+
+[*.{json}]
+indent_size = 2
+
+[*.cs]
+# Naming conventions
+dotnet_naming_rule.interfaces_should_be_pascal_case_prefixed_with_i.severity = warning
+dotnet_naming_rule.interfaces_should_be_pascal_case_prefixed_with_i.symbols = interface
+dotnet_naming_rule.interfaces_should_be_pascal_case_prefixed_with_i.style = begins_with_i
+
+dotnet_naming_symbols.interface.applicable_kinds = interface
+dotnet_naming_symbols.interface.applicable_accessibilities = *
+
+dotnet_naming_style.begins_with_i.required_prefix = I
+dotnet_naming_style.begins_with_i.capitalization = pascal_case
+
+# Code style
+csharp_prefer_braces = true:warning
+csharp_using_directive_placement = outside_namespace:warning
+dotnet_sort_system_directives_first = true
+
+# Nullable reference types
+csharp_nullable_reference_types = enable
