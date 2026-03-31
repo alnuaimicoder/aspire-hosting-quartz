@@ -10,18 +10,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial project structure with three NuGet packages
 - Core abstractions library (Library.Quartz.Abstractions)
-- Client library for job enqueuing (Aspire.Library.Quartz.Client)
+- Client library for job enqueuing (CommunityToolkit.Aspire.Quartz)
+- Hosting library for AppHost integration (CommunityToolkit.Aspire.Hosting.Quartz)
 - Background job client with OpenTelemetry tracing
 - Idempotency key support for duplicate prevention
 - Cron expression validation
 - Retry policy with exponential/linear backoff
 - SQL Server and PostgreSQL support
+- Automatic database migration service
+- Quartz.NET schema creation scripts
+- Aspire resource pattern implementation
+- Fluent configuration API (WithDatabase, WithMaxConcurrency, etc.)
 - Automatic service discovery integration
 - Comprehensive XML documentation
 - Open source project files (LICENSE, CONTRIBUTING, CODE_OF_CONDUCT)
+- Community Toolkit naming standards compliance
+- Aspire CLI support (dotnet aspire add)
 
 ### Changed
-- N/A (initial release)
+- BREAKING: Renamed packages to follow Aspire Community Toolkit standards
+  - Aspire.Library.Quartz.Client → CommunityToolkit.Aspire.Quartz
+  - Aspire.Library.Quartz.Hosting → CommunityToolkit.Aspire.Hosting.Quartz
+- Updated all namespaces to CommunityToolkit.Aspire.*
+- Added IsAspireClientIntegration and IsAspireHostingIntegration properties
 
 ### Deprecated
 - N/A (initial release)

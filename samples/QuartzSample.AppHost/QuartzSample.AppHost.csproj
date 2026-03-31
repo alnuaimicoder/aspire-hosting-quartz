@@ -1,0 +1,16 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.3.0-preview.1.26175.4">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>3b9445d7-5b90-48dd-a039-be05f16fbbb3</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QuartzSample.ApiService\QuartzSample.ApiService.csproj" />
+    <ProjectReference Include="..\QuartzSample.Web\QuartzSample.Web.csproj" />
+  </ItemGroup>
+
+</Project>
