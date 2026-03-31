@@ -132,7 +132,41 @@ public class EmailController : ControllerBase
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+We welcome contributions! Here's how you can help:
+
+### 🌟 Ways to Contribute
+
+- 🐛 **Report bugs** - Found an issue? [Open a bug report](https://github.com/alnuaimicoder/aspire-hosting-quartz/issues/new?template=bug_report.yml)
+- 💡 **Suggest features** - Have an idea? [Request a feature](https://github.com/alnuaimicoder/aspire-hosting-quartz/issues/new?template=feature_request.yml)
+- 📖 **Improve docs** - Help us make documentation better
+- 🧪 **Add tests** - Increase code coverage
+- 💻 **Submit PRs** - Fix bugs or add features
+
+### 🎯 Good First Issues
+
+New to the project? Check out issues labeled [`good first issue`](https://github.com/alnuaimicoder/aspire-hosting-quartz/labels/good%20first%20issue):
+
+- [Add more unit tests for RetryPolicy](https://github.com/alnuaimicoder/aspire-hosting-quartz/issues/1)
+- [Improve README with more examples](https://github.com/alnuaimicoder/aspire-hosting-quartz/issues/2)
+
+### 📋 Quick Start for Contributors
+
+1. **Fork** the repository
+2. **Clone** your fork: `git clone https://github.com/YOUR_USERNAME/aspire-hosting-quartz.git`
+3. **Create** a branch: `git checkout -b feature/your-feature`
+4. **Make** your changes
+5. **Test** locally: `.\scripts\quick-check.ps1`
+6. **Commit**: `git commit -m "feat: add your feature"`
+7. **Push**: `git push origin feature/your-feature`
+8. **Open** a Pull Request
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+
+### 💬 Join the Community
+
+- 💭 [GitHub Discussions](https://github.com/alnuaimicoder/aspire-hosting-quartz/discussions) - Ask questions, share ideas
+- 🐛 [GitHub Issues](https://github.com/alnuaimicoder/aspire-hosting-quartz/issues) - Report bugs, request features
+- ⭐ **Star the repo** - Show your support!
 
 ## 📄 License
 
