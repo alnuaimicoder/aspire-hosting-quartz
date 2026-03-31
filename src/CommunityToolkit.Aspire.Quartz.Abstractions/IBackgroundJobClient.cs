@@ -1,4 +1,4 @@
-namespace Library.Quartz.Abstractions;
+namespace CommunityToolkit.Aspire.Quartz;
 
 /// <summary>
 /// Defines the contract for enqueuing and scheduling background jobs.

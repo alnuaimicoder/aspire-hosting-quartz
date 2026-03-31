@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Library.Quartz.Abstractions\Library.Quartz.Abstractions.csproj" />
+    <ProjectReference Include="..\CommunityToolkit.Aspire.Quartz.Abstractions\CommunityToolkit.Aspire.Quartz.Abstractions.csproj" />
   </ItemGroup>
 
   <ItemGroup>

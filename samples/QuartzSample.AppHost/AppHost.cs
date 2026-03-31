@@ -1,11 +1,21 @@
+using CommunityToolkit.Aspire.Hosting.Quartz;
+
 var builder = DistributedApplication.CreateBuilder(args);
 
-var apiService = builder.AddProject<Projects.QuartzSample_ApiService>("apiservice")
-    .WithHttpHealthCheck("/health");
+// Add SQL Server for Quartz job storage
+var sqlserver = builder.AddSqlServer("sql")
+    .WithLifetime(ContainerLifetime.Persistent)
+    .AddDatabase("quartzdb");
 
-builder.AddProject<Projects.QuartzSample_Web>("webfrontend")
+// Add Quartz background job scheduler
+var quartz = builder.AddQuartz("quartz")
+    .WithDatabase(sqlserver);
+
+var apiService = builder.AddProject("apiservice", "../QuartzSample.ApiService/QuartzSample.ApiService.csproj")
+    .WithReference(quartz);
+
+builder.AddProject("webfrontend", "../QuartzSample.Web/QuartzSample.Web.csproj")
     .WithExternalHttpEndpoints()
-    .WithHttpHealthCheck("/health")
     .WithReference(apiService)
     .WaitFor(apiService);
 

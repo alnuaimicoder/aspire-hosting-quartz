@@ -1,7 +1,7 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="src/CommunityToolkit.Aspire.Quartz.Abstractions/CommunityToolkit.Aspire.Quartz.Abstractions.csproj" />
     <Project Path="src/CommunityToolkit.Aspire.Quartz/CommunityToolkit.Aspire.Quartz.csproj" />
     <Project Path="src/CommunityToolkit.Aspire.Hosting.Quartz/CommunityToolkit.Aspire.Hosting.Quartz.csproj" />
-    <Project Path="src/Library.Quartz.Abstractions/Library.Quartz.Abstractions.csproj" />
   </Folder>
 </Solution>

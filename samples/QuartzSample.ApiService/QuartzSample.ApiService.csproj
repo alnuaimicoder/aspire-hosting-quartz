@@ -8,9 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\QuartzSample.ServiceDefaults\QuartzSample.ServiceDefaults.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\..\src\CommunityToolkit.Aspire.Quartz.Abstractions\CommunityToolkit.Aspire.Quartz.Abstractions.csproj" />
+    <ProjectReference Include="..\..\src\CommunityToolkit.Aspire.Quartz\CommunityToolkit.Aspire.Quartz.csproj" />
   </ItemGroup>
 
 </Project>

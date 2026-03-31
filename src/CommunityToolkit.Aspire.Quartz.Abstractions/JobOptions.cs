@@ -1,4 +1,4 @@
-namespace Library.Quartz.Abstractions;
+namespace CommunityToolkit.Aspire.Quartz;
 
 /// <summary>
 /// Options for configuring individual job behavior.

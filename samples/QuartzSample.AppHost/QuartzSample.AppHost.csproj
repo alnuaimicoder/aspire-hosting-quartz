@@ -1,4 +1,4 @@
-<Project Sdk="Aspire.AppHost.Sdk/13.3.0-preview.1.26175.4">
+<Project Sdk="Aspire.AppHost.Sdk/9.0.0">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -9,8 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\QuartzSample.ApiService\QuartzSample.ApiService.csproj" />
-    <ProjectReference Include="..\QuartzSample.Web\QuartzSample.Web.csproj" />
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.0.0" />
+    <PackageReference Include="Aspire.Hosting.SqlServer" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\CommunityToolkit.Aspire.Hosting.Quartz\CommunityToolkit.Aspire.Hosting.Quartz.csproj" />
   </ItemGroup>
 
 </Project>

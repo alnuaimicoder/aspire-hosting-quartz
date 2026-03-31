@@ -1,6 +1,6 @@
 using System.Data;
 using System.Diagnostics;
-using Library.Quartz.Abstractions;
+using CommunityToolkit.Aspire.Quartz;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

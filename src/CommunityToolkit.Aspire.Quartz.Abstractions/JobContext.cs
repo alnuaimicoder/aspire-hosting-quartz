@@ -1,4 +1,4 @@
-namespace Library.Quartz.Abstractions;
+namespace CommunityToolkit.Aspire.Quartz;
 
 /// <summary>
 /// Provides context information to executing jobs.

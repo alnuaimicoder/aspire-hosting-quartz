@@ -1,4 +1,4 @@
-namespace Library.Quartz.Abstractions;
+namespace CommunityToolkit.Aspire.Quartz;
 
 /// <summary>
 /// Defines retry behavior for failed jobs.

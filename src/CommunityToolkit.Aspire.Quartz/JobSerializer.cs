@@ -1,6 +1,6 @@
 using System.Text;
 using System.Text.Json;
-using Library.Quartz.Abstractions;
+using CommunityToolkit.Aspire.Quartz;
 
 namespace CommunityToolkit.Aspire.Quartz;
 

@@ -1,7 +1,7 @@
 using System.Data;
 using System.Diagnostics;
 using System.Text.Json;
-using Library.Quartz.Abstractions;
+using CommunityToolkit.Aspire.Quartz;
 using Microsoft.Extensions.Logging;
 
 namespace CommunityToolkit.Aspire.Quartz;
