@@ -13,29 +13,133 @@ Thank you for your interest in contributing! We welcome contributions from the c
 
 ### Setup
 
-1. **Fork and clone:**
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/aspire-hosting-quartz.git
-   cd aspire-hosting-quartz
+#### Step 1: Fork the Repository
+
+1. **Go to the repository:**
+   ```
+   https://github.com/alnuaimicoder/aspire-hosting-quartz
    ```
 
-2. **Build:**
-   ```bash
-   dotnet build
-   ```
+2. **Click the "Fork" button** in the top-right corner
 
-3. **Run tests:**
-   ```bash
-   dotnet test
-   ```
+3. **Wait for GitHub to create your fork**
+   - Your fork will be at: `https://github.com/YOUR_USERNAME/aspire-hosting-quartz`
+
+#### Step 2: Clone Your Fork
+
+```bash
+# Clone your fork (replace YOUR_USERNAME with your GitHub username)
+git clone https://github.com/YOUR_USERNAME/aspire-hosting-quartz.git
+cd aspire-hosting-quartz
+```
+
+#### Step 3: Add Upstream Remote
+
+```bash
+# Add the original repository as "upstream"
+git remote add upstream https://github.com/alnuaimicoder/aspire-hosting-quartz.git
+
+# Verify remotes
+git remote -v
+# Should show:
+# origin    https://github.com/YOUR_USERNAME/aspire-hosting-quartz.git (fetch)
+# origin    https://github.com/YOUR_USERNAME/aspire-hosting-quartz.git (push)
+# upstream  https://github.com/alnuaimicoder/aspire-hosting-quartz.git (fetch)
+# upstream  https://github.com/alnuaimicoder/aspire-hosting-quartz.git (push)
+```
+
+#### Step 4: Build and Test
+
+```bash
+# Restore packages
+dotnet restore
+
+# Build solution
+dotnet build
+
+# Run tests
+dotnet test
+```
 
 ## 📝 Development Workflow
 
+### Fork Workflow (Recommended)
+
+This project uses the **Fork & Pull Request** workflow:
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  Original Repository (upstream)                         │
+│  github.com/alnuaimicoder/aspire-hosting-quartz        │
+└────────────────────┬────────────────────────────────────┘
+                     │ Fork
+                     ▼
+┌─────────────────────────────────────────────────────────┐
+│  Your Fork (origin)                                     │
+│  github.com/YOUR_USERNAME/aspire-hosting-quartz        │
+└────────────────────┬────────────────────────────────────┘
+                     │ Clone
+                     ▼
+┌─────────────────────────────────────────────────────────┐
+│  Local Repository                                       │
+│  Your Computer                                          │
+└─────────────────────────────────────────────────────────┘
+```
+
+### Keeping Your Fork Updated
+
+**Important:** Always sync your fork before starting new work!
+
+```bash
+# 1. Fetch latest changes from upstream
+git fetch upstream
+
+# 2. Switch to main branch
+git checkout main
+
+# 3. Merge upstream changes
+git merge upstream/main
+
+# 4. Push to your fork
+git push origin main
+```
+
+### Creating a Feature Branch
+
+**Never work directly on the main branch!**
+
+```bash
+# Create and switch to a new branch
+git checkout -b feature/your-feature-name
+
+# Or for bug fixes
+git checkout -b fix/bug-description
+```
+
 ### Before You Start
 
-1. Check existing [issues](https://github.com/alnuaimicoder/aspire-hosting-quartz/issues) and [pull requests](https://github.com/alnuaimicoder/aspire-hosting-quartz/pulls)
-2. Open an issue to discuss major changes
-3. Fork the repository
+1. **Check existing work:**
+   - Browse [issues](https://github.com/alnuaimicoder/aspire-hosting-quartz/issues)
+   - Check [pull requests](https://github.com/alnuaimicoder/aspire-hosting-quartz/pulls)
+   - Avoid duplicate work
+
+2. **Discuss major changes:**
+   - Open an issue first
+   - Explain your proposal
+   - Get feedback from maintainers
+
+3. **Sync your fork:**
+   ```bash
+   # Fetch latest changes from upstream
+   git fetch upstream
+
+   # Merge upstream changes into your main branch
+   git checkout main
+   git merge upstream/main
+
+   # Push updates to your fork
+   git push origin main
+   ```
 
 ### Making Changes
 
@@ -64,9 +168,25 @@ Thank you for your interest in contributing! We welcome contributions from the c
    ```
    Follow [Conventional Commits](https://www.conventionalcommits.org/)
 
-5. **Push and create PR:**
+5. **Push to your fork:**
    ```bash
    git push origin feature/your-feature-name
+   ```
+
+6. **Create Pull Request:**
+   - Go to your fork on GitHub
+   - Click "Compare & pull request"
+   - Fill in the PR template
+   - Submit the PR
+
+7. **Keep your PR updated:**
+   ```bash
+   # If main branch has new commits
+   git checkout main
+   git pull upstream main
+   git checkout feature/your-feature-name
+   git rebase main
+   git push origin feature/your-feature-name --force
    ```
 
 ## 🧪 Testing
@@ -264,6 +384,82 @@ Please read and follow our [Code of Conduct](CODE_OF_CONDUCT.md).
 - **Questions**: [GitHub Discussions](https://github.com/alnuaimicoder/aspire-hosting-quartz/discussions)
 - **Bugs**: [GitHub Issues](https://github.com/alnuaimicoder/aspire-hosting-quartz/issues)
 - **Chat**: [Discord/Slack] (if available)
+
+## 🔧 Troubleshooting
+
+### Fork Issues
+
+**Problem: Can't see "Fork" button**
+- Solution: Make sure you're logged into GitHub
+- The repository must be public
+
+**Problem: Fork is out of date**
+```bash
+# Sync your fork with upstream
+git fetch upstream
+git checkout main
+git merge upstream/main
+git push origin main
+```
+
+**Problem: Merge conflicts**
+```bash
+# Update your branch with latest main
+git checkout main
+git pull upstream main
+git checkout your-branch
+git rebase main
+
+# Resolve conflicts in your editor
+# Then continue rebase
+git add .
+git rebase --continue
+git push origin your-branch --force
+```
+
+### Build Issues
+
+**Problem: Build fails**
+```bash
+# Clean and rebuild
+dotnet clean
+dotnet restore
+dotnet build
+```
+
+**Problem: Tests fail**
+```bash
+# Make sure Docker is running (for integration tests)
+docker ps
+
+# Run tests with verbose output
+dotnet test --logger "console;verbosity=detailed"
+```
+
+### Git Issues
+
+**Problem: Accidentally committed to main**
+```bash
+# Create a new branch from current state
+git branch feature/my-feature
+
+# Reset main to upstream
+git checkout main
+git reset --hard upstream/main
+
+# Switch to your feature branch
+git checkout feature/my-feature
+```
+
+**Problem: Need to update PR with new commits**
+```bash
+# Add your changes
+git add .
+git commit -m "fix: address review comments"
+
+# Push to your fork (updates PR automatically)
+git push origin your-branch
+```
 
 ## 📄 License
 

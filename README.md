@@ -4,9 +4,13 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![.NET](https://img.shields.io/badge/.NET-8.0%20%7C%209.0%20%7C%2010.0+-512BD4)](https://dotnet.microsoft.com/)
 [![Aspire](https://img.shields.io/badge/Aspire-9.0+-512BD4)](https://learn.microsoft.com/dotnet/aspire/)
+[![NuGet](https://img.shields.io/nuget/v/CommunityToolkit.Aspire.Hosting.Quartz.svg)](https://www.nuget.org/packages/CommunityToolkit.Aspire.Hosting.Quartz/)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/CommunityToolkit.Aspire.Hosting.Quartz.svg)](https://www.nuget.org/packages/CommunityToolkit.Aspire.Hosting.Quartz/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![GitHub issues](https://img.shields.io/github/issues/alnuaimicoder/aspire-hosting-quartz)](https://github.com/alnuaimicoder/aspire-hosting-quartz/issues)
 [![GitHub stars](https://img.shields.io/github/stars/alnuaimicoder/aspire-hosting-quartz)](https://github.com/alnuaimicoder/aspire-hosting-quartz/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/alnuaimicoder/aspire-hosting-quartz)](https://github.com/alnuaimicoder/aspire-hosting-quartz/network/members)
+[![GitHub contributors](https://img.shields.io/github/contributors/alnuaimicoder/aspire-hosting-quartz)](https://github.com/alnuaimicoder/aspire-hosting-quartz/graphs/contributors)
 
 Enterprise-grade background job scheduling for .NET Aspire using Quartz.NET.
 
