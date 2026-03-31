@@ -393,6 +393,12 @@ Please read and follow our [Code of Conduct](CODE_OF_CONDUCT.md).
 - Solution: Make sure you're logged into GitHub
 - The repository must be public
 
+**Problem: GitHub Actions failing with billing error in fork**
+- Solution: This is intentional! Workflows are disabled in forks to prevent billing issues
+- You don't need to enable GitHub Actions in your fork
+- CI/CD will run automatically when you submit a Pull Request to the original repository
+- Test locally instead using `.\scripts\local-ci.ps1`
+
 **Problem: Fork is out of date**
 ```bash
 # Sync your fork with upstream
