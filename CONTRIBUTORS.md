@@ -7,6 +7,10 @@ Thank you to all the people who have contributed to CommunityToolkit.Aspire.Quar
 - **[Abdulwaisa Al Nuaimi](https://github.com/alnuaimicoder)** - Project Creator & Maintainer
 - **[waisa11](https://github.com/waisa11)** - Core Contributor
 
+## Community Contributors
+
+Want to see your name here? Check out [Issue #4](https://github.com/alnuaimicoder/aspire-hosting-quartz/issues/4) or our [good first issues](https://github.com/alnuaimicoder/aspire-hosting-quartz/labels/good%20first%20issue)!
+
 ## How to Contribute
 
 We welcome contributions from everyone! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
