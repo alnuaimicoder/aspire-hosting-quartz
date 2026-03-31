@@ -4,4 +4,9 @@
     <Project Path="src/CommunityToolkit.Aspire.Quartz/CommunityToolkit.Aspire.Quartz.csproj" />
     <Project Path="src/CommunityToolkit.Aspire.Hosting.Quartz/CommunityToolkit.Aspire.Hosting.Quartz.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/CommunityToolkit.Aspire.Hosting.Quartz.Tests/CommunityToolkit.Aspire.Hosting.Quartz.Tests.csproj" />
+    <Project Path="tests/CommunityToolkit.Aspire.Quartz.Abstractions.Tests/CommunityToolkit.Aspire.Quartz.Abstractions.Tests.csproj" />
+    <Project Path="tests/CommunityToolkit.Aspire.Quartz.Tests/CommunityToolkit.Aspire.Quartz.Tests.csproj" />
+  </Folder>
 </Solution>

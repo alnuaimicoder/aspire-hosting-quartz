@@ -29,6 +29,5 @@
 
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)icon.png" Pack="true" PackagePath="/" Condition="Exists('$(MSBuildThisFileDirectory)icon.png')" />
-    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="/" Condition="Exists('$(MSBuildThisFileDirectory)README.md')" />
   </ItemGroup>
 </Project>

@@ -4,6 +4,11 @@
     <PackageId>CommunityToolkit.Aspire.Quartz.Abstractions</PackageId>
     <Description>Core abstractions and contracts for CommunityToolkit.Aspire.Quartz background job scheduling</Description>
     <RootNamespace>CommunityToolkit.Aspire.Quartz</RootNamespace>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
 </Project>
