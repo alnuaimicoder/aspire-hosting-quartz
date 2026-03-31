@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Library.Quartz.Abstractions</PackageId>
+    <Description>Core abstractions and contracts for Aspire.Hosting.Quartz background job scheduling</Description>
+  </PropertyGroup>
+
+</Project>
