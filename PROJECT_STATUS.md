@@ -23,13 +23,18 @@
 
 **Files:** 5 | **Lines of Code:** ~200
 
-#### 3. Aspire.Library.Quartz.Client (100%)
+#### 3. CommunityToolkit.Aspire.Quartz (100%)
 - [x] `BackgroundJobClient` - Full implementation with OpenTelemetry
 - [x] `IdempotencyStore` - Duplicate prevention
 - [x] `JobSerializer` - JSON serialization
 - [x] `CronExpressionValidator` - Cron validation
 - [x] `DuplicateJobException` - Custom exception
 - [x] `QuartzClientExtensions` - DI registration
+- [x] Renamed to follow Community Toolkit standards
+- [x] Added proper package metadata for NuGet
+- [x] IsAspireClientIntegration property set
+
+**Package Name:** `CommunityToolkit.Aspire.Quartz`
 
 **Files:** 6 | **Lines of Code:** ~800
 
@@ -68,7 +73,7 @@
 ## 🚧 Remaining Work (Phase 2)
 
 ### Priority 1: Core Hosting Library
-- [ ] Aspire.Library.Quartz.Hosting
+- [ ] CommunityToolkit.Aspire.Hosting.Quartz
   - [ ] QuartzResource
   - [ ] QuartzResourceExtensions
   - [ ] Migration Service (SQL Server & PostgreSQL)
@@ -76,6 +81,7 @@
   - [ ] RetryPolicyExecutor
   - [ ] Health Checks
   - [ ] OpenTelemetry Metrics
+  - [ ] IsAspireHostingIntegration property
 
 ### Priority 2: Testing
 - [ ] Unit Tests (80%+ coverage target)
@@ -133,10 +139,12 @@
 ## 📝 Technical Decisions
 
 ### Architecture
-- **Pattern:** Client-Host separation
+- **Pattern:** Client-Host separation (Community Toolkit standards)
+- **Naming:** CommunityToolkit.Aspire.* prefix
 - **Storage:** ADO.NET direct (no ORM)
 - **Observability:** OpenTelemetry native
-- **Target Framework:** .NET 8.0
+- **Target Framework:** .NET 8.0 and higher
+- **Aspire CLI:** Fully compatible with `dotnet aspire add`
 
 ### Design Choices
 1. **Direct Database Access:** Chosen over Quartz.NET API for better control

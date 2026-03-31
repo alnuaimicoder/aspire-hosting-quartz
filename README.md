@@ -19,10 +19,20 @@ Enterprise-grade background job scheduling for .NET Aspire using Quartz.NET.
 
 ```bash
 # In your AppHost project
-dotnet add package Aspire.Library.Quartz.Hosting
+dotnet add package CommunityToolkit.Aspire.Hosting.Quartz
 
 # In your API/Service projects
-dotnet add package Aspire.Library.Quartz.Client
+dotnet add package CommunityToolkit.Aspire.Quartz
+```
+
+Or using the Aspire CLI:
+
+```bash
+# Add hosting integration to AppHost
+dotnet aspire add CommunityToolkit.Aspire.Hosting.Quartz
+
+# Add client integration to your services
+dotnet aspire add CommunityToolkit.Aspire.Quartz
 ```
 
 ## 🎯 Quick Start
@@ -51,12 +61,12 @@ builder.AddProject<Projects.WorkerService>("worker")
 public class SendEmailJob : IJob
 {
     private readonly IEmailService _emailService;
-    
+
     public SendEmailJob(IEmailService emailService)
     {
         _emailService = emailService;
     }
-    
+
     public async Task ExecuteAsync(JobContext context, CancellationToken ct)
     {
         var email = context.Parameters["email"].ToString();
@@ -71,7 +81,7 @@ public class SendEmailJob : IJob
 public class EmailController : ControllerBase
 {
     private readonly IBackgroundJobClient _jobClient;
-    
+
     [HttpPost("send")]
     public async Task<IActionResult> SendEmail(EmailRequest request)
     {
@@ -86,7 +96,7 @@ public class EmailController : ControllerBase
                     Strategy = BackoffStrategy.Exponential
                 }
             });
-        
+
         return Ok(new { jobId });
     }
 }
