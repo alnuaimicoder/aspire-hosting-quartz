@@ -18,7 +18,7 @@ public interface IBackgroundJobClient
         JobOptions? options = null,
         CancellationToken cancellationToken = default)
         where TJob : IJob;
-    
+
     /// <summary>
     /// Schedules a job for delayed execution.
     /// </summary>
@@ -34,7 +34,7 @@ public interface IBackgroundJobClient
         JobOptions? options = null,
         CancellationToken cancellationToken = default)
         where TJob : IJob;
-    
+
     /// <summary>
     /// Schedules a job with a cron expression.
     /// </summary>

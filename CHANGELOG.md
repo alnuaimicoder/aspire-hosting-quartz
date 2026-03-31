@@ -20,6 +20,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive XML documentation
 - Open source project files (LICENSE, CONTRIBUTING, CODE_OF_CONDUCT)
 
+### Changed
+- N/A (initial release)
+
+### Deprecated
+- N/A (initial release)
+
+### Removed
+- N/A (initial release)
+
+### Fixed
+- N/A (initial release)
+
+### Security
+- N/A (initial release)
+
+---
+
 ## [0.1.0-alpha] - 2026-03-31
 
 ### Added
