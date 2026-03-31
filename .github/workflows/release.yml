@@ -1,0 +1,123 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g., 1.0.0)'
+        required: true
+        type: string
+
+env:
+  DOTNET_VERSION: '8.0.x'
+  DOTNET_VERSION_9: '9.0.x'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup .NET 8.0
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Setup .NET 9.0
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION_9 }}
+
+    - name: Get version from tag
+      id: get_version
+      run: |
+        if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+          echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+        else
+          echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build -c Release --no-restore /p:Version=${{ steps.get_version.outputs.VERSION }}
+
+    - name: Run tests
+      run: dotnet test -c Release --no-build --verbosity normal
+
+    - name: Pack NuGet packages
+      run: dotnet pack -c Release --no-build -o ./artifacts /p:Version=${{ steps.get_version.outputs.VERSION }}
+
+    - name: List artifacts
+      run: ls -la ./artifacts
+
+    - name: Publish to NuGet.org
+      run: |
+        dotnet nuget push ./artifacts/CommunityToolkit.Aspire.Quartz.Abstractions.${{ steps.get_version.outputs.VERSION }}.nupkg \
+          --api-key ${{ secrets.NUGET_API_KEY }} \
+          --source https://api.nuget.org/v3/index.json \
+          --skip-duplicate
+        
+        dotnet nuget push ./artifacts/CommunityToolkit.Aspire.Quartz.${{ steps.get_version.outputs.VERSION }}.nupkg \
+          --api-key ${{ secrets.NUGET_API_KEY }} \
+          --source https://api.nuget.org/v3/index.json \
+          --skip-duplicate
+        
+        dotnet nuget push ./artifacts/CommunityToolkit.Aspire.Hosting.Quartz.${{ steps.get_version.outputs.VERSION }}.nupkg \
+          --api-key ${{ secrets.NUGET_API_KEY }} \
+          --source https://api.nuget.org/v3/index.json \
+          --skip-duplicate
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: |
+          ./artifacts/*.nupkg
+          ./artifacts/*.snupkg
+        body: |
+          ## CommunityToolkit.Aspire.Quartz v${{ steps.get_version.outputs.VERSION }}
+          
+          ### 📦 Packages Published
+          
+          - [CommunityToolkit.Aspire.Quartz.Abstractions](https://www.nuget.org/packages/CommunityToolkit.Aspire.Quartz.Abstractions/${{ steps.get_version.outputs.VERSION }})
+          - [CommunityToolkit.Aspire.Quartz](https://www.nuget.org/packages/CommunityToolkit.Aspire.Quartz/${{ steps.get_version.outputs.VERSION }})
+          - [CommunityToolkit.Aspire.Hosting.Quartz](https://www.nuget.org/packages/CommunityToolkit.Aspire.Hosting.Quartz/${{ steps.get_version.outputs.VERSION }})
+          
+          ### 📝 Release Notes
+          
+          See [CHANGELOG.md](https://github.com/alnuaimicoder/aspire-hosting-quartz/blob/main/CHANGELOG.md) for details.
+          
+          ### 🚀 Installation
+          
+          ```bash
+          dotnet add package CommunityToolkit.Aspire.Hosting.Quartz
+          ```
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Summary
+      run: |
+        echo "## Release Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "✅ Version: ${{ steps.get_version.outputs.VERSION }}" >> $GITHUB_STEP_SUMMARY
+        echo "✅ Packages published to NuGet.org" >> $GITHUB_STEP_SUMMARY
+        echo "✅ GitHub release created" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### 📦 Published Packages" >> $GITHUB_STEP_SUMMARY
+        echo "- CommunityToolkit.Aspire.Quartz.Abstractions" >> $GITHUB_STEP_SUMMARY
+        echo "- CommunityToolkit.Aspire.Quartz" >> $GITHUB_STEP_SUMMARY
+        echo "- CommunityToolkit.Aspire.Hosting.Quartz" >> $GITHUB_STEP_SUMMARY
