@@ -27,22 +27,16 @@ dotnet add package AspireQuartz
 
 ### Option 2: Using Aspire CLI
 
-The Aspire CLI provides an easy way to add integrations:
+> **Note**: The `aspire add` command currently only works with packages published in the official Aspire Community Toolkit. Since AspireQuartz is not yet part of the toolkit, this option is not available yet.
+>
+> **Why?** The Aspire CLI only recognizes packages that are registered in the [Aspire Community Toolkit](https://github.com/CommunityToolkit/Aspire). We've submitted a proposal to add AspireQuartz to the toolkit, and once approved, you'll be able to use `aspire add AspireQuartz`.
+>
+> **For now**, please use Option 1 (`dotnet add package`) to install AspireQuartz.
 
 ```bash
-# In your AppHost project
-cd YourApp.AppHost
-aspire add AspireQuartz.Hosting
-
-# In your API/Service projects
-cd YourApp.ApiService
-aspire add AspireQuartz
-```
-
-You can also specify a version:
-
-```bash
-aspire add AspireQuartz --version 1.0.0
+# This will work once AspireQuartz is added to Aspire Community Toolkit
+aspire add AspireQuartz.Hosting  # Not available yet
+aspire add AspireQuartz           # Not available yet
 ```
 
 ### Option 3: Using Package Manager Console (Visual Studio)

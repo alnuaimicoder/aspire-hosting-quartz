@@ -24,7 +24,6 @@ This isn't "Quartz for Aspire" - it's an **Aspire-native job scheduling platform
 | Resource Pattern | ❌ | ❌ | ✅ |
 | OpenTelemetry | ❌ | ❌ | ✅ |
 | Idempotency | ❌ | ❌ | ✅ |
-| Real-time Updates | ❌ | ✅ | ✅ |
 | Full Quartz Power | ✅ | ❌ | ✅ |
 | Cloud-native DX | ❌ | ⚠️ | ✅ |
 
@@ -34,9 +33,9 @@ This isn't "Quartz for Aspire" - it's an **Aspire-native job scheduling platform
 - ✅ **Idempotency** - Prevent duplicate job execution
 - ✅ **OpenTelemetry** - Distributed tracing out of the box
 - ✅ **Health Checks** - Aspire Dashboard integration
-- ✅ **Real-time Updates** - SignalR for live job status
 - ✅ **Multi-database** - PostgreSQL, SQL Server, MySQL, SQLite
 - ✅ **Auto-migrations** - Automatic table creation using EF Core
+- ✅ **Sample app** - Includes SignalR for real-time job monitoring
 
 ### Aspire Integration
 - ✅ **Resource Pattern** - First-class citizen in Aspire
@@ -72,12 +71,12 @@ dotnet add package AspireQuartz
 
 ### Using Aspire CLI
 
-```bash
-# In your AppHost project
-aspire add AspireQuartz.Hosting
+> **Note**: The `aspire add` command currently only works with packages published in the official Aspire Community Toolkit. Since AspireQuartz is not yet part of the toolkit, use the `dotnet add package` command instead. We're working on getting AspireQuartz added to the toolkit!
 
-# In your API/Service projects
-aspire add AspireQuartz
+```bash
+# This will work once AspireQuartz is added to Aspire Community Toolkit
+aspire add AspireQuartz.Hosting  # Not available yet
+aspire add AspireQuartz           # Not available yet
 ```
 
 ## 🎯 Quick Start
