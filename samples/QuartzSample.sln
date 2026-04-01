@@ -11,8 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuartzSample.ApiService", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuartzSample.Web", "QuartzSample.Web\QuartzSample.Web.csproj", "{A6369F3F-DBA9-432C-AF50-CBBF2577B787}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuartzSample.Worker", "QuartzSample.Worker\QuartzSample.Worker.csproj", "{A2A069D5-7753-484F-9835-89F4D8561760}"
-EndProject
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,18 +70,7 @@ Global
 		{A6369F3F-DBA9-432C-AF50-CBBF2577B787}.Release|x64.Build.0 = Release|Any CPU
 		{A6369F3F-DBA9-432C-AF50-CBBF2577B787}.Release|x86.ActiveCfg = Release|Any CPU
 		{A6369F3F-DBA9-432C-AF50-CBBF2577B787}.Release|x86.Build.0 = Release|Any CPU
-		{A2A069D5-7753-484F-9835-89F4D8561760}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A2A069D5-7753-484F-9835-89F4D8561760}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A2A069D5-7753-484F-9835-89F4D8561760}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{A2A069D5-7753-484F-9835-89F4D8561760}.Debug|x64.Build.0 = Debug|Any CPU
-		{A2A069D5-7753-484F-9835-89F4D8561760}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{A2A069D5-7753-484F-9835-89F4D8561760}.Debug|x86.Build.0 = Debug|Any CPU
-		{A2A069D5-7753-484F-9835-89F4D8561760}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A2A069D5-7753-484F-9835-89F4D8561760}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A2A069D5-7753-484F-9835-89F4D8561760}.Release|x64.ActiveCfg = Release|Any CPU
-		{A2A069D5-7753-484F-9835-89F4D8561760}.Release|x64.Build.0 = Release|Any CPU
-		{A2A069D5-7753-484F-9835-89F4D8561760}.Release|x86.ActiveCfg = Release|Any CPU
-		{A2A069D5-7753-484F-9835-89F4D8561760}.Release|x86.Build.0 = Release|Any CPU
+
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

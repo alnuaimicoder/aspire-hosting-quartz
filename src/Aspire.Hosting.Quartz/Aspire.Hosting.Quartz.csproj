@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>AspireQuartz.Hosting</PackageId>
+    <Title>AspireQuartz.Hosting - Background Jobs Hosting for .NET Aspire</Title>
+    <Description>Hosting integration for .NET Aspire AppHost that provides Quartz.NET background job scheduling with persistent storage, automatic migrations, health checks, and OpenTelemetry metrics. Supports PostgreSQL, SQL Server, MySQL, and SQLite.</Description>
+    <RootNamespace>Aspire.Hosting.Quartz</RootNamespace>
+    <PackageTags>aspire;quartz;background-jobs;hosting;scheduling;apphost;aspire-hosting</PackageTags>
+    <PackageProjectUrl>https://github.com/alnuaimicoder/aspire-hosting-quartz</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/alnuaimicoder/aspire-hosting-quartz</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <Authors>AlNuaimi</Authors>
+    <Company>AlNuaimi</Company>
+    <Copyright>Copyright © 2026 AlNuaimi</Copyright>
+    <IsAspireHostingIntegration>true</IsAspireHostingIntegration>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Aspire.Quartz.Abstractions\Aspire.Quartz.Abstractions.csproj" />
+    <ProjectReference Include="..\Aspire.Quartz\Aspire.Quartz.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting" />
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" />
+    <PackageReference Include="Aspire.Hosting.SqlServer" />
+    <PackageReference Include="Quartz" />
+    <PackageReference Include="Quartz.Extensions.Hosting" />
+    <PackageReference Include="Quartz.Serialization.Json" />
+    <PackageReference Include="Microsoft.Data.SqlClient" />
+    <PackageReference Include="Npgsql" />
+    <PackageReference Include="OpenTelemetry" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" />
+  </ItemGroup>
+
+</Project>

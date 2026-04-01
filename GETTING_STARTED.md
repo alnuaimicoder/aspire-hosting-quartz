@@ -1,6 +1,6 @@
-# Getting Started with CommunityToolkit.Aspire.Quartz
+# Getting Started with AspireQuartz
 
-This guide will help you get started with background job scheduling in your .NET Aspire application using CommunityToolkit.Aspire.Quartz.
+This guide will help you get started with background job scheduling in your .NET Aspire application using AspireQuartz.
 
 ## Prerequisites
 
@@ -13,43 +13,43 @@ Before you begin, ensure you have:
 
 ## Installation
 
-### Option 1: Using Aspire CLI (Recommended)
-
-The Aspire CLI provides the easiest way to add integrations to your Aspire projects:
+### Option 1: Using .NET CLI (Recommended)
 
 ```bash
 # In your AppHost project
 cd YourApp.AppHost
-aspire add CommunityToolkit.Aspire.Hosting.Quartz
+dotnet add package AspireQuartz.Hosting
 
 # In your API/Service projects
 cd YourApp.ApiService
-aspire add CommunityToolkit.Aspire.Quartz
+dotnet add package AspireQuartz
+```
+
+### Option 2: Using Aspire CLI
+
+The Aspire CLI provides an easy way to add integrations:
+
+```bash
+# In your AppHost project
+cd YourApp.AppHost
+aspire add AspireQuartz.Hosting
+
+# In your API/Service projects
+cd YourApp.ApiService
+aspire add AspireQuartz
 ```
 
 You can also specify a version:
 
 ```bash
-aspire add CommunityToolkit.Aspire.Hosting.Quartz --version 1.0.0
-```
-
-### Option 2: Using .NET CLI
-
-```bash
-# In your AppHost project
-cd YourApp.AppHost
-dotnet add package CommunityToolkit.Aspire.Hosting.Quartz
-
-# In your API/Service projects
-cd YourApp.ApiService
-dotnet add package CommunityToolkit.Aspire.Quartz
+aspire add AspireQuartz --version 1.0.0
 ```
 
 ### Option 3: Using Package Manager Console (Visual Studio)
 
 ```powershell
-Install-Package CommunityToolkit.Aspire.Hosting.Quartz
-Install-Package CommunityToolkit.Aspire.Quartz
+Install-Package AspireQuartz.Hosting
+Install-Package AspireQuartz
 ```
 
 ## Quick Start (5 Minutes)
@@ -59,21 +59,16 @@ Install-Package CommunityToolkit.Aspire.Quartz
 Open your `Program.cs` in the AppHost project:
 
 ```csharp
-using CommunityToolkit.Aspire.Hosting.Quartz;
-
 var builder = DistributedApplication.CreateBuilder(args);
 
-// Add SQL Server
-var sqlserver = builder.AddSqlServer("sql")
+// Add PostgreSQL
+var postgres = builder.AddPostgres("postgres")
+    .WithPgAdmin()
     .AddDatabase("quartzdb");
 
-// Add Quartz
-var quartz = builder.AddQuartz("quartz")
-    .WithDatabase(sqlserver);
-
-// Reference Quartz in your API
-var apiService = builder.AddProject<Projects.YourApp_ApiService>("apiservice")
-    .WithReference(quartz);
+// Add your API service (jobs run here - no separate worker needed!)
+builder.AddProject<Projects.YourApp_ApiService>("apiservice")
+    .WithReference(postgres);
 
 builder.Build().Run();
 ```
@@ -83,7 +78,7 @@ builder.Build().Run();
 Create a new file `SendEmailJob.cs` in your API project:
 
 ```csharp
-using CommunityToolkit.Aspire.Quartz;
+using Quartz;
 
 namespace YourApp.ApiService;
 
@@ -96,32 +91,50 @@ public class SendEmailJob : IJob
         _logger = logger;
     }
 
-    public async Task ExecuteAsync(JobContext context, CancellationToken cancellationToken)
+    public async Task Execute(IJobExecutionContext context)
     {
-        var email = context.Parameters?["email"]?.ToString();
-        var subject = context.Parameters?["subject"]?.ToString();
+        var email = context.JobDetail.JobDataMap.GetString("email");
+        var subject = context.JobDetail.JobDataMap.GetString("subject");
 
         _logger.LogInformation("Sending email to {Email}: {Subject}", email, subject);
 
         // Your email sending logic here
-        await Task.Delay(1000, cancellationToken);
+        await Task.Delay(1000);
 
         _logger.LogInformation("Email sent successfully!");
     }
 }
 ```
 
-### Step 3: Enqueue Jobs
+### Step 3: Configure API Service
 
 In your API's `Program.cs`:
 
 ```csharp
-using CommunityToolkit.Aspire.Quartz;
+using Aspire.Quartz;
+using Quartz;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add Quartz client
-builder.Services.AddQuartzClient();
+// Add Quartz.NET with full scheduling power
+builder.Services.AddQuartz(q =>
+{
+    // Configure PostgreSQL persistence
+    q.UsePersistentStore(store =>
+    {
+        store.UsePostgres(builder.Configuration.GetConnectionString("quartzdb")!);
+        store.UseNewtonsoftJsonSerializer();
+    });
+});
+
+// Add Quartz hosted service
+builder.Services.AddQuartzHostedService(options =>
+{
+    options.WaitForJobsToComplete = true;
+});
+
+// Add AspireQuartz client for dynamic scheduling (MUST be called after AddQuartz)
+builder.Services.AddQuartzClient(builder.Configuration.GetConnectionString("quartzdb"));
 
 var app = builder.Build();
 
@@ -129,9 +142,10 @@ var app = builder.Build();
 app.MapPost("/send-email", async (IBackgroundJobClient jobClient) =>
 {
     var jobId = await jobClient.EnqueueAsync<SendEmailJob>(
-        parameters: new { email = "user@example.com", subject = "Hello!" },
-        options: new JobOptions
+        new { email = "user@example.com", subject = "Hello!" },
+        new JobOptions
         {
+            IdempotencyKey = "email-123",
             RetryPolicy = new RetryPolicy
             {
                 MaxAttempts = 3,
@@ -144,46 +158,6 @@ app.MapPost("/send-email", async (IBackgroundJobClient jobClient) =>
 
 app.Run();
 ```
-
-### Step 4: Create a Worker
-
-Create a new Worker Service project:
-
-```bash
-dotnet new worker -n YourApp.Worker
-cd YourApp.Worker
-dotnet add package Quartz
-dotnet add package Quartz.Extensions.Hosting
-```
-
-Configure the worker in `Program.cs`:
-
-```csharp
-using Quartz;
-
-var builder = Host.CreateApplicationBuilder(args);
-
-builder.Services.AddQuartz(q =>
-{
-    q.UsePersistentStore(options =>
-    {
-        options.UseSqlServer(sqlServer =>
-        {
-            sqlServer.ConnectionString = builder.Configuration.GetConnectionString("quartzdb");
-            sqlServer.TablePrefix = "QRTZ_";
-        });
-        options.UseNewtonsoftJsonSerializer();
-    });
-});
-
-builder.Services.AddQuartzHostedService();
-builder.Services.AddTransient<SendEmailJob>();
-
-var host = builder.Build();
-host.Run();
-```
-
-### Step 5: Run Your Application
 
 ```bash
 dotnet run --project YourApp.AppHost

@@ -1,5 +1,6 @@
 using Aspire.Hosting.ApplicationModel;
 using CommunityToolkit.Aspire.Hosting.Quartz;
+using CommunityToolkit.Aspire.Quartz;
 using FluentAssertions;
 
 namespace CommunityToolkit.Aspire.Hosting.Quartz.Tests;

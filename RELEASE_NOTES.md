@@ -23,31 +23,32 @@ Three packages are now available on NuGet.org:
 ## ✨ Key Features
 
 ### 🚀 Background Job Scheduling
+- **Native Quartz.NET integration** - Full access to IScheduler API
 - **Enqueue jobs** for immediate execution
 - **Schedule with delay** using TimeSpan
 - **Schedule with cron** expressions for recurring jobs
-- **Job priorities** for execution order control
+- **Dynamic job scheduling** via API endpoints
 
 ### 💾 Database Support
-- **SQL Server** - Full support with automatic migrations
-- **PostgreSQL** - Full support with automatic migrations
+- **PostgreSQL** - Primary database with pgAdmin support
+- **SQL Server** - Also supported with automatic migrations
 - **Automatic schema** creation on startup
 - **Persistent storage** survives application restarts
 
 ### 🔄 Reliability
-- **Retry policies** - Exponential and linear backoff strategies
 - **Idempotency** - Prevent duplicate job execution
 - **Job validation** - Early parameter and cron validation
 - **Error handling** - Clear, actionable error messages
+- **Health checks** - Built-in Quartz scheduler health check
 
 ### 📊 Observability
 - **OpenTelemetry tracing** - Distributed tracing for all operations
-- **Aspire Dashboard** - Real-time monitoring and metrics
+- **Aspire Dashboard** - Real-time monitoring
+- **SignalR integration** - Live job status updates
 - **Structured logging** - Comprehensive logging with context
-- **Metrics emission** - Job count, duration, failures
 
 ### 🎯 Developer Experience
-- **Multi-targeting** - .NET 8.0 and 9.0 support
+- **Multi-targeting** - .NET 8.0, 9.0, and 10.0+ support
 - **Fluent API** - Clean, intuitive configuration
 - **Type safety** - Strong typing with generics
 - **XML documentation** - Full IntelliSense support
@@ -77,37 +78,51 @@ dotnet add package CommunityToolkit.Aspire.Quartz
 ```csharp
 var builder = DistributedApplication.CreateBuilder(args);
 
-var sqlserver = builder.AddSqlServer("sql")
+var postgres = builder.AddPostgres("postgres")
+    .WithPgAdmin()
     .AddDatabase("quartzdb");
 
 var quartz = builder.AddQuartz("quartz")
-    .WithDatabase(sqlserver);
+    .WithPostgreSql(postgres);
 
 builder.AddProject<Projects.ApiService>("api")
     .WithReference(quartz);
 ```
 
-**2. Define a Job:**
+**2. Configure API Service:**
 ```csharp
-public class SendEmailJob : IJob
+// Add Quartz.NET with full scheduling power
+builder.Services.AddQuartz(q =>
 {
-    public async Task ExecuteAsync(JobContext context, CancellationToken ct)
+    q.ScheduleJob<HealthCheckJob>(trigger => trigger
+        .WithCronSchedule("0 */5 * * * ?") // Every 5 minutes
+        .UsingJobData("endpoint", "https://api.example.com/health"));
+});
+
+builder.Services.AddQuartzHostedService(options =>
+{
+    options.WaitForJobsToComplete = true;
+});
+
+// Add Quartz client (MUST be called after AddQuartz)
+builder.Services.AddQuartzClient("quartzdb");
+```
+
+**3. Define a Job:**
+```csharp
+public class HealthCheckJob : IJob
+{
+    public async Task Execute(IJobExecutionContext context)
     {
-        var email = context.Parameters["email"]?.ToString();
+        var endpoint = context.JobDetail.JobDataMap.GetString("endpoint");
         // Your logic here
     }
 }
 ```
 
-**3. Enqueue Jobs:**
+**4. Schedule Jobs Dynamically:**
 ```csharp
-await jobClient.EnqueueAsync<SendEmailJob>(
-    new { email = "user@example.com" },
-    new JobOptions {
-        IdempotencyKey = "email-123",
-        RetryPolicy = new RetryPolicy { MaxAttempts = 3 }
-    }
-);
+await scheduler.ScheduleJob(job, trigger);
 ```
 
 ---
@@ -126,20 +141,20 @@ await jobClient.EnqueueAsync<SendEmailJob>(
 ## 🎯 What's New in v1.0.0
 
 ### Core Features
-- ✅ Complete job scheduling system
+- ✅ Complete job scheduling system using Quartz.NET
 - ✅ Three production-ready NuGet packages
-- ✅ Multi-targeting (.NET 8.0 and 9.0)
-- ✅ SQL Server and PostgreSQL support
+- ✅ Multi-targeting (.NET 8.0, 9.0, and 10.0+)
+- ✅ PostgreSQL and SQL Server support
 - ✅ Automatic database migrations
-- ✅ Retry policies with backoff strategies
 - ✅ Idempotency support
 - ✅ Cron expression scheduling
+- ✅ SignalR real-time updates
 
 ### Observability
 - ✅ OpenTelemetry distributed tracing
 - ✅ Aspire Dashboard integration
+- ✅ Health checks
 - ✅ Structured logging
-- ✅ Metrics emission
 
 ### Developer Tools
 - ✅ Complete sample application
@@ -153,10 +168,11 @@ await jobClient.EnqueueAsync<SendEmailJob>(
 ## 🔧 Technical Details
 
 ### Supported Platforms
-- **.NET**: 8.0 (LTS), 9.0 (STS)
-- **.NET Aspire**: 9.0+
-- **SQL Server**: 2019+
-- **PostgreSQL**: 12+
+- **.NET**: 8.0 (LTS), 9.0 (STS), 10.0+ (samples)
+- **.NET Aspire**: 13.2.0+
+- **Quartz.NET**: 3.13.1+
+- **PostgreSQL**: 12+ (primary)
+- **SQL Server**: 2019+ (supported)
 
 ### Dependencies
 - Minimal external dependencies
@@ -175,13 +191,14 @@ await jobClient.EnqueueAsync<SendEmailJob>(
 
 A complete working sample is included demonstrating:
 
-- ✅ Job enqueuing from REST API
-- ✅ Job execution in Worker service
-- ✅ SQL Server persistence
-- ✅ Retry policies
+- ✅ Job scheduling from REST API
+- ✅ Job execution with Quartz.NET
+- ✅ PostgreSQL persistence with pgAdmin
+- ✅ SignalR real-time updates
 - ✅ Idempotency
 - ✅ OpenTelemetry tracing
 - ✅ Aspire Dashboard monitoring
+- ✅ Blazor dashboard with live updates
 
 See [samples/README.md](samples/README.md) for details.
 
@@ -265,7 +282,7 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 ---
 
-**Release Date**: March 31, 2026
+**Release Date**: April 1, 2026
 **Version**: 1.0.0
 **Status**: Stable
 

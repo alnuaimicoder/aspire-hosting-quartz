@@ -8,7 +8,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 
     <!-- Package metadata -->
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>Aspire Community</Authors>
     <Company>Aspire Community Toolkit</Company>
     <Copyright>Copyright © 2026 Aspire Community</Copyright>

@@ -1,5 +1,6 @@
 using QuartzSample.Web;
 using QuartzSample.Web.Components;
+using QuartzSample.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,12 @@ builder.Services.AddHttpClient<WeatherApiClient>(client =>
     {
         // This URL uses "https+http://" to indicate HTTPS is preferred over HTTP.
         // Learn more about service discovery scheme resolution at https://aka.ms/dotnet/sdschemes.
+        client.BaseAddress = new("https+http://apiservice");
+    });
+
+// Add Quartz API client
+builder.Services.AddHttpClient<QuartzApiClient>(client =>
+    {
         client.BaseAddress = new("https+http://apiservice");
     });
 

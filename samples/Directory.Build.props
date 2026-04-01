@@ -2,5 +2,6 @@
   <!-- Disable Central Package Management for samples -->
   <PropertyGroup>
     <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+    <TargetFramework>net10.0</TargetFramework>
   </PropertyGroup>
 </Project>

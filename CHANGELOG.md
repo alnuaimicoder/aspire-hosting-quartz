@@ -10,35 +10,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Planned
 - Unit tests with 80%+ coverage
 - Integration tests with Testcontainers
-- PostgreSQL sample
-- Cron scheduling sample
 - API documentation with DocFX
 - Performance benchmarks
 
-## [1.0.0] - TBD
+## [1.0.0] - 2026-04-01
 
 ### Added
 
 #### Core Features
-- **Background Job Scheduling**: Complete job scheduling system for .NET Aspire
+- **Background Job Scheduling**: Complete job scheduling system for .NET Aspire using Quartz.NET
 - **Three NuGet Packages**:
   - `CommunityToolkit.Aspire.Quartz.Abstractions` - Core interfaces and contracts
-  - `CommunityToolkit.Aspire.Quartz` - Client library for job enqueuing
+  - `CommunityToolkit.Aspire.Quartz` - Client library with IScheduler integration
   - `CommunityToolkit.Aspire.Hosting.Quartz` - Hosting integration for Aspire
 - **Multi-Targeting**: Support for .NET 8.0 and .NET 9.0
+- **Native Quartz.NET Scheduling**: Full access to Quartz.NET features via IScheduler
 - **Job Enqueuing**: Enqueue jobs for immediate execution
 - **Delayed Scheduling**: Schedule jobs with TimeSpan delay
 - **Cron Scheduling**: Schedule jobs with cron expressions
-- **Retry Policies**: Configurable retry with exponential and linear backoff
 - **Idempotency**: Prevent duplicate job execution with idempotency keys
-- **Database Support**: SQL Server and PostgreSQL persistence
+- **Database Support**: PostgreSQL persistence (SQL Server also supported)
 - **Automatic Migration**: Database schema created automatically on startup
+- **Real-Time Updates**: SignalR integration for live job status updates
 
 #### Observability
 - **OpenTelemetry Integration**: Distributed tracing for all operations
-- **Metrics**: Job execution count, duration, and failure metrics
+- **Health Checks**: Built-in health check for Quartz scheduler
 - **Structured Logging**: Comprehensive logging with job context
 - **Aspire Dashboard**: Full integration with Aspire Dashboard
+- **SignalR Hub**: Real-time job execution notifications
 
 #### Developer Experience
 - **Fluent API**: Clean, intuitive API design
@@ -80,9 +80,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 #### Compatibility
 - .NET 8.0 (LTS - supported until November 2026)
 - .NET 9.0 (STS - supported until May 2026)
-- .NET Aspire 9.0+
-- SQL Server 2019+
-- PostgreSQL 12+
+- .NET 10.0 (samples use .NET 10.0)
+- .NET Aspire 13.2.0+
+- Quartz.NET 3.13.1+
+- PostgreSQL 12+ (primary)
+- SQL Server 2019+ (supported)
 
 ### Breaking Changes
 - N/A (initial release)

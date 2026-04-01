@@ -1,4 +1,4 @@
-# Contributing to CommunityToolkit.Aspire.Quartz
+# Contributing to AspireQuartz
 
 Thank you for your interest in contributing! We welcome contributions from the community.
 
@@ -255,9 +255,9 @@ public async Task<string> EnqueueJob(JobOptions opts)
 ```
 aspire-hosting-quartz/
 ├── src/                                    # Source code
-│   ├── CommunityToolkit.Aspire.Quartz.Abstractions/
-│   ├── CommunityToolkit.Aspire.Quartz/
-│   └── CommunityToolkit.Aspire.Hosting.Quartz/
+│   ├── Aspire.Quartz.Abstractions/
+│   ├── Aspire.Quartz/
+│   └── Aspire.Hosting.Quartz/
 ├── tests/                                  # Tests
 ├── samples/                                # Sample applications
 ├── docs/                                   # Documentation

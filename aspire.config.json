@@ -1,0 +1,5 @@
+{
+  "appHost": {
+    "path": "samples/QuartzSample.AppHost/QuartzSample.AppHost.csproj"
+  }
+}

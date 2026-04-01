@@ -1,56 +1,83 @@
-# CommunityToolkit.Aspire.Quartz
+# 🚀 AspireQuartz
 
-[![CI](https://github.com/alnuaimicoder/aspire-hosting-quartz/actions/workflows/ci.yml/badge.svg)](https://github.com/alnuaimicoder/aspire-hosting-quartz/actions)
+[![NuGet](https://img.shields.io/nuget/v/AspireQuartz.svg)](https://www.nuget.org/packages/AspireQuartz/)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/AspireQuartz.svg)](https://www.nuget.org/packages/AspireQuartz/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![.NET](https://img.shields.io/badge/.NET-8.0%20%7C%209.0%20%7C%2010.0+-512BD4)](https://dotnet.microsoft.com/)
-[![Aspire](https://img.shields.io/badge/Aspire-9.0+-512BD4)](https://learn.microsoft.com/dotnet/aspire/)
-[![NuGet](https://img.shields.io/nuget/v/CommunityToolkit.Aspire.Hosting.Quartz.svg)](https://www.nuget.org/packages/CommunityToolkit.Aspire.Hosting.Quartz/)
-[![NuGet Downloads](https://img.shields.io/nuget/dt/CommunityToolkit.Aspire.Hosting.Quartz.svg)](https://www.nuget.org/packages/CommunityToolkit.Aspire.Hosting.Quartz/)
+[![Aspire](https://img.shields.io/badge/Aspire-13.2+-512BD4)](https://learn.microsoft.com/dotnet/aspire/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
-[![GitHub issues](https://img.shields.io/github/issues/alnuaimicoder/aspire-hosting-quartz)](https://github.com/alnuaimicoder/aspire-hosting-quartz/issues)
 [![GitHub stars](https://img.shields.io/github/stars/alnuaimicoder/aspire-hosting-quartz)](https://github.com/alnuaimicoder/aspire-hosting-quartz/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/alnuaimicoder/aspire-hosting-quartz)](https://github.com/alnuaimicoder/aspire-hosting-quartz/network/members)
-[![GitHub contributors](https://img.shields.io/github/contributors/alnuaimicoder/aspire-hosting-quartz)](https://github.com/alnuaimicoder/aspire-hosting-quartz/graphs/contributors)
 
-Enterprise-grade background job scheduling for .NET Aspire using Quartz.NET.
+**The standard way to do background jobs in .NET Aspire** - Production-ready job scheduling with Quartz.NET.
+
+## 🎯 Why This Library?
+
+.NET Aspire is missing a critical piece: **background job scheduling**.
+
+This isn't "Quartz for Aspire" - it's an **Aspire-native job scheduling platform** that happens to use Quartz.NET as the engine.
+
+### What Makes It Different?
+
+| Feature | Quartz.NET | Hangfire | This Library |
+|---------|-----------|----------|--------------|
+| Aspire Integration | ❌ Manual | ❌ Manual | ✅ Native |
+| Resource Pattern | ❌ | ❌ | ✅ |
+| OpenTelemetry | ❌ | ❌ | ✅ |
+| Idempotency | ❌ | ❌ | ✅ |
+| Real-time Updates | ❌ | ✅ | ✅ |
+| Full Quartz Power | ✅ | ❌ | ✅ |
+| Cloud-native DX | ❌ | ⚠️ | ✅ |
 
 ## 🚀 Features
 
-- **Seamless .NET Aspire integration** - First-class resource pattern support
-- **Built-in OpenTelemetry observability** - Distributed tracing and metrics
-- **Automatic retry policies** - Exponential backoff with configurable strategies
-- **Idempotency guarantees** - Prevent duplicate job execution
-- **Persistent job storage** - SQL Server and PostgreSQL support
-- **Cron-based scheduling** - Complex scheduling with cron expressions
-- **Real-time metrics** - Monitor jobs in Aspire Dashboard
-- **Multi-targeting support** - Works with .NET 8.0, 9.0, and future versions
+### Production-Ready
+- ✅ **Idempotency** - Prevent duplicate job execution
+- ✅ **OpenTelemetry** - Distributed tracing out of the box
+- ✅ **Health Checks** - Aspire Dashboard integration
+- ✅ **Real-time Updates** - SignalR for live job status
+- ✅ **Multi-database** - PostgreSQL, SQL Server, MySQL, SQLite
+- ✅ **Auto-migrations** - Automatic table creation using EF Core
+
+### Aspire Integration
+- ✅ **Resource Pattern** - First-class citizen in Aspire
+- ✅ **Connection Injection** - Automatic configuration
+- ✅ **Service Discovery** - Works with Aspire patterns
+- ✅ **Dashboard Support** - Full observability
+
+### Developer Experience
+- ✅ **Native Quartz.NET** - Full power, no abstractions hiding features
+- ✅ **Simplified Client** - For dynamic scheduling
+- ✅ **Type Safety** - Strong typing with generics
+- ✅ **Clean API** - Intuitive and discoverable
 
 ## 📋 Requirements
 
 - **.NET SDK**: 8.0 or higher
-- **.NET Aspire**: 9.0 or higher
-- **Database**: SQL Server or PostgreSQL (for persistent storage)
+- **.NET Aspire**: 13.2.0 or higher
+- **Quartz.NET**: 3.13.1 or higher
+- **Database**: PostgreSQL 12+ (primary), SQL Server 2019+, MySQL 8.0+, or SQLite 3.0+
+- **Auto-migrations**: Uses `AppAny.Quartz.EntityFrameworkCore.Migrations` for automatic table creation
 
 ## 📦 Installation
 
-### Using Aspire CLI (Recommended)
+### Using .NET CLI (Recommended)
 
 ```bash
 # In your AppHost project
-aspire add CommunityToolkit.Aspire.Hosting.Quartz
+dotnet add package AspireQuartz.Hosting
 
 # In your API/Service projects
-aspire add CommunityToolkit.Aspire.Quartz
+dotnet add package AspireQuartz
 ```
 
-### Using .NET CLI
+### Using Aspire CLI
 
 ```bash
 # In your AppHost project
-dotnet add package CommunityToolkit.Aspire.Hosting.Quartz
+aspire add AspireQuartz.Hosting
 
 # In your API/Service projects
-dotnet add package CommunityToolkit.Aspire.Quartz
+aspire add AspireQuartz
 ```
 
 ## 🎯 Quick Start
@@ -60,60 +87,117 @@ dotnet add package CommunityToolkit.Aspire.Quartz
 ```csharp
 var builder = DistributedApplication.CreateBuilder(args);
 
-var sqlserver = builder.AddSqlServer("sql")
+// Add PostgreSQL
+var postgres = builder.AddPostgres("postgres")
+    .WithPgAdmin()
     .AddDatabase("quartzdb");
 
-var quartz = builder.AddQuartz("quartz")
-    .WithDatabase(sqlserver);
-
+// Add your API service (jobs run here - no separate worker needed!)
 builder.AddProject<Projects.ApiService>("api")
-    .WithReference(quartz);
+    .WithReference(postgres);
 
-builder.AddProject<Projects.WorkerService>("worker")
-    .WithReference(quartz);
+builder.Build().Run();
 ```
 
-### 2. Define a Job
+**That's it!** No separate worker service needed - jobs run in your API service.
+
+### 2. Configure API Service
 
 ```csharp
-public class SendEmailJob : IJob
-{
-    private readonly IEmailService _emailService;
+var builder = WebApplication.CreateBuilder(args);
 
-    public SendEmailJob(IEmailService emailService)
+// Add Quartz.NET with full scheduling power
+builder.Services.AddQuartz(q =>
+{
+    // Configure PostgreSQL persistence
+    q.UsePersistentStore(store =>
     {
-        _emailService = emailService;
+        store.UsePostgres(builder.Configuration.GetConnectionString("quartzdb")!);
+        store.UseNewtonsoftJsonSerializer();
+    });
+
+    // Configure recurring jobs
+    q.ScheduleJob<HealthCheckJob>(trigger => trigger
+        .WithIdentity("health-check-trigger")
+        .WithCronSchedule("0 */5 * * * ?") // Every 5 minutes
+        .UsingJobData("endpoint", "https://api.example.com/health"));
+});
+
+// Add Quartz hosted service
+builder.Services.AddQuartzHostedService(options =>
+{
+    options.WaitForJobsToComplete = true;
+});
+
+// Add AspireQuartz client for dynamic scheduling (MUST be called after AddQuartz)
+builder.Services.AddQuartzClient(builder.Configuration.GetConnectionString("quartzdb"));
+
+var app = builder.Build();
+app.Run();
+```
+
+### 3. Define a Job
+
+```csharp
+public class HealthCheckJob : IJob
+{
+    private readonly IHttpClientFactory _httpClientFactory;
+    private readonly ILogger<HealthCheckJob> _logger;
+
+    public HealthCheckJob(IHttpClientFactory httpClientFactory, ILogger<HealthCheckJob> logger)
+    {
+        _httpClientFactory = httpClientFactory;
+        _logger = logger;
     }
 
-    public async Task ExecuteAsync(JobContext context, CancellationToken ct)
+    public async Task Execute(IJobExecutionContext context)
     {
-        var email = context.Parameters["email"].ToString();
-        await _emailService.SendAsync(email, ct);
+        var endpoint = context.JobDetail.JobDataMap.GetString("endpoint");
+        var client = _httpClientFactory.CreateClient();
+
+        var response = await client.GetAsync(endpoint);
+        _logger.LogInformation("Health check for {Endpoint}: {Status}",
+            endpoint, response.StatusCode);
     }
 }
 ```
 
-### 3. Enqueue Jobs
+### 4. Schedule Jobs Dynamically
 
 ```csharp
-public class EmailController : ControllerBase
+public class JobsController : ControllerBase
 {
     private readonly IBackgroundJobClient _jobClient;
 
-    [HttpPost("send")]
-    public async Task<IActionResult> SendEmail(EmailRequest request)
+    // Enqueue a job for immediate execution
+    [HttpPost("enqueue")]
+    public async Task<IActionResult> EnqueueJob()
     {
         var jobId = await _jobClient.EnqueueAsync<SendEmailJob>(
-            parameters: new { email = request.Email },
-            options: new JobOptions
-            {
-                IdempotencyKey = $"email-{request.Email}",
-                RetryPolicy = new RetryPolicy
-                {
-                    MaxAttempts = 3,
-                    Strategy = BackoffStrategy.Exponential
-                }
-            });
+            new { email = "user@example.com" },
+            new JobOptions { IdempotencyKey = "email-123" });
+
+        return Ok(new { jobId });
+    }
+
+    // Schedule with delay
+    [HttpPost("schedule-delay")]
+    public async Task<IActionResult> ScheduleWithDelay()
+    {
+        var jobId = await _jobClient.ScheduleAsync<SendEmailJob>(
+            new { email = "user@example.com" },
+            TimeSpan.FromMinutes(5));
+
+        return Ok(new { jobId });
+    }
+
+    // Schedule with cron
+    [HttpPost("schedule-cron")]
+    public async Task<IActionResult> ScheduleWithCron()
+    {
+        var jobId = await _jobClient.ScheduleAsync<SendEmailJob>(
+            new { email = "user@example.com" },
+            "0 0 9 * * ?"); // Every day at 9 AM
 
         return Ok(new { jobId });
     }
@@ -123,7 +207,8 @@ public class EmailController : ControllerBase
 ## 📚 Documentation
 
 - **[Getting Started Guide](GETTING_STARTED.md)** - Complete step-by-step tutorial
-- **[Sample Application](samples/README.md)** - Working example with API and Worker
+- **[Database Setup Guide](samples/DATABASE_SETUP.md)** - Multi-database configuration
+- **[Sample Application](samples/README.md)** - Working example with all features
 - **[Versioning Policy](docs/VERSIONING.md)** - Multi-targeting and support policy
 - **[Changelog](CHANGELOG.md)** - Release history and changes
 - **[Roadmap](ROADMAP.md)** - Future plans and features
